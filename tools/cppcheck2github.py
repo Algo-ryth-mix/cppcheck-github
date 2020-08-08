@@ -37,7 +37,7 @@ for error in report[1]:
 
         log.message = error.attrib['msg']
 
-        if len(error.getchildren()) > 0:
+        if len(list(error)) > 0:
             if error[0].tag == "location":
                 log.line = error[0].attrib['line']
                 log.col = error[0].attrib['column']
