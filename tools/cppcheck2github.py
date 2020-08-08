@@ -30,10 +30,7 @@ for error in report[1]:
     log = github_log();
 
     if error.tag == "error":
-        if error.attrib['severity']=="error":
-            log.type = "failure"
-        else:
-            log.type = "warning"
+        log.type = error.attrib['severity']
 
         log.message = error.attrib['msg']
 
