@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="1.82"/>
+    <errors>
+        <error id="arrayIndexOutOfBounds" severity="error" msg="Array &apos;a[2]&apos; accessed at index 2, which is out of bounds." verbose="Array &apos;a[2]&apos; accessed at index 2, which is out of bounds." cwe="119">
+            <location file="src/arrayIndexOutOfBounds/bad.c" line="7" info="Array index out of bounds"/>
+        </error>
+        <error id="autoVariables" severity="error" msg="Address of local auto-variable assigned to a function parameter." verbose="Dangerous assignment - the function parameter is assigned the address of a local auto-variable. Local auto-variables are reserved from the stack which is freed when the function ends. So the pointer to a local variable is invalid after the function ends." cwe="562">
+            <location file="src/autoVariables/bad.c" line="4"/>
+        </error>
+        <error id="arrayIndexOutOfBounds" severity="error" msg="Array &apos;a[2]&apos; accessed at index 2, which is out of bounds." verbose="Array &apos;a[2]&apos; accessed at index 2, which is out of bounds." cwe="119">
+            <location file="src/bufferAccessOutOfBounds/bad.c" line="6" info="Array index out of bounds"/>
+        </error>
+        <error id="eraseDereference" severity="error" msg="Iterator &apos;iter&apos; used after element has been erased." verbose="The iterator &apos;iter&apos; is invalid after the element it pointed to has been erased. Dereferencing or comparing it with another iterator is invalid operation." cwe="664">
+            <location file="src/erase/bad.cpp" line="11"/>
+            <location file="src/erase/bad.cpp" line="9"/>
+        </error>
+        <error id="memleak" severity="error" msg="Memory leak: a" verbose="Memory leak: a" cwe="401">
+            <location file="src/memleak/bad.c" line="8"/>
+        </error>
+        <error id="bufferAccessOutOfBounds" severity="error" msg="Buffer is accessed out of bounds: str" verbose="Buffer is accessed out of bounds: str">
+            <location file="src/outOfBounds/bad.c" line="5"/>
+        </error>
+        <error id="resourceLeak" severity="error" msg="Resource leak: a" verbose="Resource leak: a" cwe="775">
+            <location file="src/resourceLeak/bad.c" line="8"/>
+        </error>
+        <error id="syntaxError" severity="error" msg="Invalid number of character &apos;{&apos; when no macros are defined." verbose="Invalid number of character &apos;{&apos; when no macros are defined.">
+            <location file="src/syntaxError/bad.c" line="2"/>
+        </error>
+        <error id="syntaxError" severity="error" msg="syntax error" verbose="syntax error">
+            <location file="src/syntaxError/bad.cpp" line="13"/>
+        </error>
+    </errors>
+</results>

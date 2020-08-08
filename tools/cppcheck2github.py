@@ -24,6 +24,7 @@ class github_log:
     def generate(self):
         if(self.type != ""):
             print(f"::{self.type} file={self.file},line={self.line},col={self.col}::{self.message}")
+            global return_code
             return_code = 1
 
 
@@ -40,7 +41,8 @@ for error in report[1]:
         if len(list(error)) > 0:
             if error[0].tag == "location":
                 log.line = error[0].attrib['line']
-                log.col = error[0].attrib['column']
+                if 'column' in error[0].attrib:
+                    log.col = error[0].attrib['column']
                 log.file = error[0].attrib['file']
 
         else:
