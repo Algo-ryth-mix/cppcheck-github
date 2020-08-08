@@ -15,4 +15,4 @@ jobs:
       run: sudo apt-get update -yqq && sudo apt-get install -yqq cppcheck
 
     - name: cppcheck
-      run: cppcheck src --xml 2>&1 | python3 tools/cppcheck2github.py
+      run: cppcheck src --xml --error-exitcode=1  2>&1 | python3 tools/cppcheck2github.py
