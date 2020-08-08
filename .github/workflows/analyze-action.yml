@@ -1,0 +1,16 @@
+name: analyze-action
+on:
+  pull_request:
+    branches: [master,develop]
+
+jobs:
+  anaylze:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: get cppcheck
+      run: sudo apt-get update -yqq && sudo apt-get install -yqq cppcheck
+
+    - name: cppcheck
+      run: cppcheck src --xml 2>&1 | python3 tools/cppcheck2github.py
