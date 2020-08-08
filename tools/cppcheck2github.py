@@ -11,6 +11,8 @@ except KeyboardInterrupt:
     sys.stdout.flush()
     pass
 
+return_code = 0
+
 class github_log:
     def __init__(self):
         self.type = ""
@@ -22,6 +24,7 @@ class github_log:
     def generate(self):
         if(self.type != ""):
             print(f"::{self.type} file={self.file},line={self.line},col={self.col}::{self.message}")
+            return_code = 1
 
 
 report = ET.fromstring(output)
@@ -46,3 +49,5 @@ for error in report[1]:
             log.file = "[Internal]"
 
     log.generate()
+
+sys.exit(return_code)
