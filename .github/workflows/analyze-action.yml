@@ -2,6 +2,8 @@ name: analyze-action
 on:
   pull_request:
     branches: [master,develop]
+  push:
+    branches: [master]
 
 jobs:
   anaylze:
