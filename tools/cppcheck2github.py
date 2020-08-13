@@ -2,7 +2,7 @@ import sys
 import xml.etree.ElementTree as ET
 from pprint import pprint
 
-output = ""
+output = ''
 
 try:
     for line in sys.stdin:
@@ -11,38 +11,39 @@ except KeyboardInterrupt:
     sys.stdout.flush()
     pass
 
+
 class github_log:
     def __init__(self):
-        self.type = ""
-        self.file = ""
-        self.line = ""
-        self.col = ""
-        self.message = ""
+        self.type = ''
+        self.file = ''
+        self.line = ''
+        self.col = ''
+        self.message = ''
 
     def generate(self):
-        if(self.type != ""):
-            print(f"::{self.type} file={self.file},line={self.line},col={self.col}::{self.message}")
+        if(self.type != ''):
+            print(f'::{self.type} file={self.file},line={self.line},col={self.col}::{self.message}')
+            global return_code
 
 
 report = ET.fromstring(output)
 for error in report[1]:
+    if error.tag == 'error':
 
-    log = github_log();
+        #generate new github log and populate with default values
+        log = github_log();
+        log.type = error.attrib.get('severity','warning')
+        log.message = error.attrib.get('msg','unknown')
 
-    if error.tag == "error":
-        log.type = error.attrib['severity']
-
-        log.message = error.attrib['msg']
-
-        if len(error.getchildren()) > 0:
-            if error[0].tag == "location":
-                log.line = error[0].attrib['line']
-                log.col = error[0].attrib['column']
-                log.file = error[0].attrib['file']
+        if len(list(error)) > 0:
+            if error[0].tag == 'location':
+                log.line = error[0].attrib.get('line','0')
+                log.col  = error[0].attrib.get('column','0')
+                log.file = error[0].attrib.get('file','[internal]')
 
         else:
-            log.col = "0"
-            log.line = "0"
-            log.file = "[Internal]"
+            log.col = '0'
+            log.line = '0'
+            log.file = '[internal]'
 
-    log.generate()
+        log.generate()
